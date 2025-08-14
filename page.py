@@ -422,7 +422,7 @@ def show(selected_date=None, date_range=None):
     # df_sensor.csv (온도/전압/전류) — 선택 날짜만 필터
     # 롤링(window=6) 먼저 계산 → 그 다음 Lot별 평균으로 그래프 표시 (pH 형식 그대로)
     # ─────────────────────────────────────────────────────────
-    SENSOR_CSV = "/Users/t2023-m0056/Desktop/파일/df_sensor.csv"
+    SENSOR_CSV = "df_sensor.csv"
 
     try:
         df_sensor = pd.read_csv(SENSOR_CSV)
@@ -738,3 +738,4 @@ def show(selected_date=None, date_range=None):
 
 if __name__ == "__main__":
     pass
+
