@@ -46,4 +46,7 @@ numpy~=2.0
 
 urllib3==2.3.0
 watchdog==6.0.0
+streamlit-autorefresh
+
+
 
