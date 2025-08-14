@@ -36,13 +36,13 @@ def show(selected_date=None, date_range=None):
     # ------------------------- 데이터 로더 -------------------------
     @st.cache_data
     def load_raw():
-        df = pd.read_csv("/Users/t2023-m0056/Desktop/파일/df_sensor.csv")
+        df = pd.read_csv("df_sensor.csv")
         df["DateTime"] = pd.to_datetime(df["DateTime"], errors="coerce")
         return df.dropna(subset=["DateTime"]).sort_values("DateTime")
 
     @st.cache_data
     def load_thresholds():
-        df = pd.read_csv("/Users/t2023-m0056/Desktop/파일/df_thresh_z (1).csv")
+        df = pd.read_csv("df_thresh_z (1).csv")
         df["ClusterLabel"] = pd.to_numeric(df["ClusterLabel"], errors="coerce").astype(
             "Int64"
         )
