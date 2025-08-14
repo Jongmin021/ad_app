@@ -38,5 +38,12 @@ toml==0.10.2
 tornado==6.4.2
 typing_extensions==4.12.2
 tzdata==2025.1
+plotly~=6.3      # plotly.express 포함, PyPI에 3.13 지원 명시
+# 선택
+streamlit~=1.38  # 버전 고정 원할 때만
+pandas~=2.2      # DataFrame 사용 시
+numpy~=2.0 
+
 urllib3==2.3.0
 watchdog==6.0.0
+
