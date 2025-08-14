@@ -11,8 +11,8 @@ def show(selected_date=None, date_range=None):
     import pandas as pd
 
     # 사이드바
-    DEFAULT_IMG = "/Users/t2023-m0056/Downloads/KakaoTalk_Photo_2025-08-14-02-25-08.png"
-    DEFAULT_CSV = "/Users/t2023-m0056/Desktop/파일/df_sensor.csv"
+    DEFAULT_IMG = "KakaoTalk_Photo_2025-08-14-02-25-08.png"
+    DEFAULT_CSV = "df_sensor.csv"
     st.sidebar.header("경로 설정")
     panel_img_path = st.sidebar.text_input("패널 이미지 경로", DEFAULT_IMG)
     df_path = st.sidebar.text_input("CSV 경로", DEFAULT_CSV)
