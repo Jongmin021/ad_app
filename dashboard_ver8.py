@@ -70,14 +70,14 @@ with tab1:
         st.success(f"✅ {uploaded_file.name} 파일이 업로드되었습니다.")
         
         # 이미지 파일 경로 설정
-        r2_graph_path = "R2_TF.png"
-        loss_graph_path = "loss_epoch_TF.png"
-        test1_path = "Test1.png"
-        test2_path = "Test2.png"
-        test3_path = "Test3.png"
-        test4_path = "Test4.png"
-        test5_path = "Test5.png"
-        test6_path = "Test6.png"
+        r2_graph_path = "dashboard_image/R2_TF.png"
+        loss_graph_path = "dashboard_image/loss_epoch_TF.png"
+        test1_path = "dashboard_image/Test1.png"
+        test2_path = "dashboard_image/Test2.png"
+        test3_path = "dashboard_image/Test3.png"
+        test4_path = "dashboard_image/Test4.png"
+        test5_path = "dashboard_image/Test5.png"
+        test6_path = "dashboard_image/Test6.png"
         
         # 좌우 5:5 분할
         col_left, col_right = st.columns([5, 5])
@@ -85,7 +85,7 @@ with tab1:
         # 왼쪽 열 (상하 5:5)
         with col_left:
             # 좌상단: R2 그래프
-            st.markdown("### ☑️ R² 그래프")
+            st.markdown("### <span style='font-size: 2em;'>R² 그래프</span>", unsafe_allow_html=True)
             
             # R2 그래프 이미지
             if r2_graph_path:
@@ -105,7 +105,7 @@ with tab1:
                 st.info("R² 그래프 이미지 파일 경로를 입력하세요.")
             
             # 좌하단: Loss vs Epoch 그래프
-            st.markdown("### ☑️ Loss vs Epoch 그래프")
+            st.markdown("### <span style='font-size: 2em;'>Loss vs Epoch 그래프</span>", unsafe_allow_html=True)
             
             # 설명 텍스트
             st.markdown("""
@@ -132,7 +132,7 @@ with tab1:
             st.markdown("<div style='margin-bottom: 50px;'></div>", unsafe_allow_html=True)
 
             # 우상단: 모델 성능 지표 (30% 높이)
-            st.markdown("### ☑️ 모델 성능 지표")
+            st.markdown("### <span style='font-size: 2em;'>모델 성능 지표</span>", unsafe_allow_html=True)
             
             # 1x3 메트릭 배치
             metric_cols = st.columns(3)
@@ -146,7 +146,7 @@ with tab1:
             for col, (metric_name, metric_value) in zip(metric_cols, metrics):
                 with col:
                     st.markdown(f"""
-                    <div style='text-align: center; padding: 10px;'>
+                    <div style='text-align: center; padding: 20px; border: 2px solid #000; background-color: #fff; border-radius: 10px;'>
                         <p style='font-size: 30px; color: #666; margin: 0; font-weight: 500;'>{metric_name}</p>
                         <p style='font-size: 50px; font-weight: bold; color: #000; margin: 5px 0;'>{metric_value}</p>
                     </div>
@@ -156,7 +156,7 @@ with tab1:
             st.markdown("<div style='margin-bottom: 100px;'></div>", unsafe_allow_html=True)
             
             # 우하단: 테스트 결과 - SOC Profile (70% 높이)
-            st.markdown("### ☑️ 테스트 결과 - SoC Profile")
+            st.markdown("### <span style='font-size: 2em;'>테스트 결과 - SoC Profile</span>", unsafe_allow_html=True)
             
             # 드롭다운 메뉴 - 크기 조정
             st.markdown("""
@@ -222,7 +222,7 @@ with tab2:
     st.header("주행거리 예측")
     
     # 상단: 데이터 업로드
-    st.markdown("### ☑️ 데이터 업로드")
+    st.markdown("### 데이터 업로드")
     drive_csv = st.file_uploader("주행 데이터 CSV 파일을 업로드하세요", type=['csv'], key="drive_csv_uploader")
     
     if drive_csv is not None:
@@ -258,7 +258,7 @@ with tab2:
             # 좌측: 온도 선택 및 데이터 표시
             with col_left:
                 # 온도 드롭다운 (상단 20%)
-                st.markdown("### ☑️ 온도 설정")
+                st.markdown("### 온도 설정")
                 temp_option = st.selectbox(
                     "온도 선택",
                     [40, 25, 10, 0, -10, -20],
@@ -272,8 +272,8 @@ with tab2:
                 # 선택된 온도에 해당하는 데이터 필터링 및 1800개 행만 선택
                 df_filtered = df_full[df_full['ambient_temp'] == temp_option].head(1800).copy()
                 
-                # 데이터 표시 (하단 80%)
-                st.markdown("### ☑️ 데이터")
+                # 데이터 표시
+                st.markdown("### 데이터")
                 display_cols = ['Time', 'SOC_pred', 'Temperature', 'Speed_kmh', 'Distance_km']
                 df_display = df_filtered[display_cols].copy()
                 df_display.columns = ['Time', 'SOC_pred', 'Temperature', 'Speed', 'Distance']
@@ -299,8 +299,21 @@ with tab2:
                 soc_change_per_min = soc_change / 10 if soc_change > 0 else 0
                 remaining_time = remaining_soc / soc_change_per_min if soc_change_per_min > 0 else 0
                 
-                # 상단: 예상 주행거리 (30%)
-                st.markdown("### ☑️ 예상 주행 정보")
+                # 현재 SoC 값 (마지막 SoC값)
+                current_soc = df_filtered['SOC_pred'].iloc[-1]
+                
+                # 상단: 현재 SoC
+                st.markdown("### 현재 SoC")
+                
+                st.markdown(f"""
+                <div style='background-color: #e8f5e9; padding: 20px; border-radius: 10px; margin-bottom: 20px;'>
+                    <p style='font-size: 18px; color: #2e7d32; margin: 0; font-weight: 600;'>현재 SoC</p>
+                    <p style='font-size: 40px; font-weight: bold; color: #1b5e20; margin: 10px 0 0 0;'>{current_soc*100:.2f}%</p>
+                </div>
+                """, unsafe_allow_html=True)
+                
+                # 중단: 예상 주행 정보
+                st.markdown("### 예상 주행 정보")
                 
                 st.markdown(f"""
                 <div style='background-color: #e3f2fd; padding: 20px; border-radius: 10px; margin-bottom: 15px;'>
@@ -316,8 +329,8 @@ with tab2:
                 </div>
                 """, unsafe_allow_html=True)
                 
-                # 하단: 10분간 통계 (70%)
-                st.markdown("### ☑️ 10분간 주행 통계")
+                # 하단: 10분간 통계
+                st.markdown("### 10분간 주행 통계")
                 
                 stats_data = [
                     ("SoC 변화량", f"{soc_change*100:.2f}%"),
@@ -335,7 +348,7 @@ with tab2:
             
             # 우측: 변수 프로파일 (3행 1열)
             with col_right:
-                st.markdown("### ☑️ 주행 프로파일")
+                st.markdown("### 주행 프로파일")
                 
                 # 1800개 데이터를 일반(1200개)과 하이라이트(600개)로 분리
                 df_normal = df_filtered.iloc[:1200]
@@ -440,5 +453,4 @@ with tab2:
         except Exception as e:
             st.error(f"데이터 처리 중 오류가 발생했습니다: {e}")
     else:
-
         st.info("📁 주행 데이터 CSV 파일을 업로드하여 시작하세요.")
