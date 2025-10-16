@@ -70,14 +70,14 @@ with tab1:
         st.success(f"✅ {uploaded_file.name} 파일이 업로드되었습니다.")
         
         # 이미지 파일 경로 설정
-        r2_graph_path = "dashboard_image/R2_TF.png"
-        loss_graph_path = "dashboard_image/loss_epoch_TF.png"
-        test1_path = "dashboard_image/Test1.png"
-        test2_path = "dashboard_image/Test2.png"
-        test3_path = "dashboard_image/Test3.png"
-        test4_path = "dashboard_image/Test4.png"
-        test5_path = "dashboard_image/Test5.png"
-        test6_path = "dashboard_image/Test6.png"
+        r2_graph_path = "R2_TF.png"
+        loss_graph_path = "loss_epoch_TF.png"
+        test1_path = "Test1.png"
+        test2_path = "Test2.png"
+        test3_path = "Test3.png"
+        test4_path = "Test4.png"
+        test5_path = "Test5.png"
+        test6_path = "Test6.png"
         
         # 좌우 5:5 분할
         col_left, col_right = st.columns([5, 5])
@@ -453,4 +453,5 @@ with tab2:
         except Exception as e:
             st.error(f"데이터 처리 중 오류가 발생했습니다: {e}")
     else:
+
         st.info("📁 주행 데이터 CSV 파일을 업로드하여 시작하세요.")
